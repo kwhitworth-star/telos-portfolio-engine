@@ -983,6 +983,24 @@
             .print-footer a {
                 color: #4fd1c5;
             }
+
+            .disclaimer {
+                display: block !important;
+                margin-top: 30px !important;
+                padding: 15px !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                border-radius: 4px !important;
+                font-size: 0.7rem !important;
+                line-height: 1.4 !important;
+                color: #666 !important;
+                page-break-inside: avoid !important;
+            }
+
+            .disclaimer-title {
+                color: #333 !important;
+                font-weight: 600 !important;
+            }
         }
 
         .print-footer {
@@ -991,6 +1009,25 @@
 
         .print-only-image {
             display: none;
+        }
+
+        .disclaimer {
+            margin-top: 40px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: left;
+        }
+
+        .disclaimer-title {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -1243,6 +1280,11 @@
                 <button class="btn btn-secondary" id="prev1" onclick="previousSection(1)" disabled>Previous</button>
                 <button class="btn btn-primary" id="next1" onclick="nextSection(1)" disabled>Next Section</button>
             </div>
+
+            <div class="disclaimer">
+                <div class="disclaimer-title">Important Disclosure</div>
+                This tool is provided for educational and informational purposes only and does not constitute investment advice, a recommendation, or an offer to buy or sell any securities. The information presented should not be considered as personalized financial, legal, or tax advice. Past performance is not indicative of future results. Investing involves risk, including the possible loss of principal. Consult with a qualified financial advisor before making any investment decisions. Not FDIC insured. No bank guarantee. May lose value.
+            </div>
         </div>
 
         <!-- Section 2: Liquidity -->
@@ -1462,6 +1504,11 @@
             <div class="navigation">
                 <button class="btn btn-secondary" id="prev2" onclick="previousSection(2)">Previous</button>
                 <button class="btn btn-primary" id="next2" onclick="nextSection(2)" disabled>Next Section</button>
+            </div>
+
+            <div class="disclaimer">
+                <div class="disclaimer-title">Important Disclosure</div>
+                This tool is provided for educational and informational purposes only and does not constitute investment advice, a recommendation, or an offer to buy or sell any securities. The information presented should not be considered as personalized financial, legal, or tax advice. Past performance is not indicative of future results. Investing involves risk, including the possible loss of principal. Consult with a qualified financial advisor before making any investment decisions. Not FDIC insured. No bank guarantee. May lose value.
             </div>
         </div>
 
@@ -1683,6 +1730,11 @@
                 <button class="btn btn-secondary" id="prev3" onclick="previousSection(3)">Previous</button>
                 <button class="btn btn-primary" id="next3" onclick="showResults()" disabled>View Results</button>
             </div>
+
+            <div class="disclaimer">
+                <div class="disclaimer-title">Important Disclosure</div>
+                This tool is provided for educational and informational purposes only and does not constitute investment advice, a recommendation, or an offer to buy or sell any securities. The information presented should not be considered as personalized financial, legal, or tax advice. Past performance is not indicative of future results. Investing involves risk, including the possible loss of principal. Consult with a qualified financial advisor before making any investment decisions. Not FDIC insured. No bank guarantee. May lose value.
+            </div>
         </div>
 
         <!-- Results Section -->
@@ -1793,6 +1845,12 @@
                 <div class="action-buttons">
                     <button class="btn btn-secondary" onclick="openShareModal()">Share Results</button>
                     <button class="btn btn-primary" onclick="retakeAssessment()">Retake Assessment</button>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="disclaimer">
+                    <div class="disclaimer-title">Important Disclosure</div>
+                    This assessment is provided for educational and informational purposes only and does not constitute investment advice, a recommendation, or an offer to buy or sell any securities. The results and asset allocation suggestions presented are based solely on your responses and should not be considered as personalized financial, legal, or tax advice. Past performance is not indicative of future results. Investing involves risk, including the possible loss of principal. The asset sleeve allocations shown are hypothetical examples and may not be suitable for your individual circumstances. Before making any investment decisions, consult with a qualified financial advisor, tax professional, or legal counsel. Securities offered through properly licensed broker-dealers. Investment advisory services offered through registered investment advisers. Not FDIC insured. No bank guarantee. May lose value.
                 </div>
 
                 <!-- Print Footer (only visible when printing) -->
