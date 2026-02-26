@@ -518,64 +518,6 @@
             flex-wrap: wrap;
         }
 
-        /* Test Suite */
-        .test-runner {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .test-btn {
-            background: rgba(99, 179, 237, 0.2);
-            border: 1px solid rgba(99, 179, 237, 0.5);
-            color: #63b3ed;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .test-btn:hover {
-            background: rgba(99, 179, 237, 0.3);
-        }
-
-        .test-results {
-            display: none;
-            position: fixed;
-            bottom: 60px;
-            right: 20px;
-            width: 300px;
-            max-height: 400px;
-            overflow-y: auto;
-            background: rgba(12, 18, 32, 0.95);
-            border: 1px solid rgba(79, 209, 197, 0.3);
-            border-radius: 12px;
-            padding: 16px;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.75rem;
-        }
-
-        .test-results.visible {
-            display: block;
-        }
-
-        .test-pass {
-            color: #48bb78;
-        }
-
-        .test-fail {
-            color: #fc8181;
-        }
-
-        .test-summary {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         /* Responsive */
         @media (max-width: 600px) {
             .brand {
@@ -773,7 +715,6 @@
             .section:not(.active),
             .progress-container,
             .progress-text,
-            .test-runner,
             .modal-overlay,
             .action-buttons,
             .navigation {
@@ -1895,12 +1836,6 @@
         </div>
     </div>
 
-    <!-- Test Runner -->
-    <div class="test-runner">
-        <button class="test-btn" onclick="toggleTests()">Run Tests</button>
-        <div class="test-results" id="testResults"></div>
-    </div>
-
     <script>
         // ============================================
         // STATE MANAGEMENT
@@ -2454,146 +2389,6 @@ Trivium Asset Management Partners`);
             // Reset state and restart
             startAssessment();
         }
-
-        // ============================================
-        // EMBEDDED TEST SUITE
-        // ============================================
-
-        const tests = [];
-
-        function test(name, fn) {
-            tests.push({ name, fn });
-        }
-
-        async function runTests() {
-            const resultsDiv = document.getElementById('testResults');
-            resultsDiv.innerHTML = '<div style="margin-bottom: 10px; color: #718096;">Running tests...</div>';
-            resultsDiv.classList.add('visible');
-
-            let passed = 0;
-            let failed = 0;
-            let results = '';
-
-            for (const t of tests) {
-                try {
-                    await t.fn();
-                    passed++;
-                    results += `<div class="test-pass">✓ ${t.name}</div>`;
-                } catch (error) {
-                    failed++;
-                    results += `<div class="test-fail">✗ ${t.name}: ${error.message}</div>`;
-                }
-            }
-
-            results += `<div class="test-summary">Passed: ${passed}, Failed: ${failed}</div>`;
-            resultsDiv.innerHTML = results;
-        }
-
-        function toggleTests() {
-            const resultsDiv = document.getElementById('testResults');
-            if (resultsDiv.classList.contains('visible')) {
-                resultsDiv.classList.remove('visible');
-            } else {
-                runTests();
-            }
-        }
-
-        // Define tests
-        test('Scoring: Empty answers returns zeros', () => {
-            const tempAnswers = { ...answers };
-            answers = {};
-            calculateScores();
-            // With no answers, total is 0, which would cause NaN
-            // Let's adjust - in reality users must answer all questions
-            answers = tempAnswers;
-        });
-
-        test('Scoring: All 3s returns balanced scores', () => {
-            const tempAnswers = { ...answers };
-            answers = {};
-            for (let i = 1; i <= 15; i++) answers[`q${i}`] = 3;
-            calculateScores();
-            
-            const tolerance = 0.01;
-            if (Math.abs(scores.stability - 0.333) > tolerance) throw new Error('Stability not ~33%');
-            if (Math.abs(scores.liquidity - 0.333) > tolerance) throw new Error('Liquidity not ~33%');
-            if (Math.abs(scores.return - 0.333) > tolerance) throw new Error('Return not ~33%');
-            
-            answers = tempAnswers;
-        });
-
-        test('Scoring: Max stability returns high stability', () => {
-            const tempAnswers = { ...answers };
-            answers = {};
-            // Max stability (5s), min others (1s)
-            for (let i = 1; i <= 5; i++) answers[`q${i}`] = 5;
-            for (let i = 6; i <= 15; i++) answers[`q${i}`] = 1;
-            calculateScores();
-            
-            if (scores.stability <= scores.liquidity) throw new Error('Stability should be highest');
-            if (scores.stability <= scores.return) throw new Error('Stability should be highest');
-            
-            answers = tempAnswers;
-        });
-
-        test('Navigation: Next button disabled without answers', () => {
-            const nextBtn = document.getElementById('next1');
-            const tempAnswers = { ...answers };
-            answers = {};
-            document.querySelectorAll('#section1 input[type="radio"]').forEach(r => r.checked = false);
-            updateNavButtons(1);
-            if (!nextBtn.disabled) throw new Error('Next should be disabled');
-            answers = tempAnswers;
-        });
-
-        test('Barycentric: Point inside triangle', () => {
-            // Any valid barycentric coordinate should map inside triangle
-            const s = 0.4, l = 0.3, r = 0.3;
-            if (Math.abs(s + l + r - 1) > 0.001) throw new Error('Coordinates must sum to 1');
-        });
-
-        test('Amplification: Increases spread from center', () => {
-            // Test that amplification moves scores away from center
-            const result = amplifyScores(0.4, 0.33, 0.27);
-            
-            // Stability should be amplified further from 0.33
-            if (result.stability <= 0.4) throw new Error('Stability should be amplified above 0.4');
-            // Return should be pushed further below 0.33
-            if (result.return >= 0.27) throw new Error('Return should be reduced below 0.27');
-            // Sum should still equal 1
-            const sum = result.stability + result.liquidity + result.return;
-            if (Math.abs(sum - 1) > 0.001) throw new Error('Amplified scores must sum to 1');
-        });
-
-        test('Asset allocation: Sums to 100%', () => {
-            const tempAnswers = { ...answers };
-            answers = {};
-            for (let i = 1; i <= 15; i++) answers[`q${i}`] = 3;
-            calculateScores();
-            
-            const banking = (scores.stability + scores.liquidity) / 2;
-            const privateAlloc = (scores.stability + scores.return) / 2;
-            const stocks = (scores.liquidity + scores.return) / 2;
-            const total = banking + privateAlloc + stocks;
-            
-            // After normalization they should equal 1
-            const normalized = (banking + privateAlloc + stocks) / total;
-            if (Math.abs(normalized - 1) > 0.001) throw new Error('Allocation must sum to 100%');
-            
-            answers = tempAnswers;
-        });
-
-        test('Accredited: Checkbox triggers result', () => {
-            const checkbox = document.getElementById('accredited1');
-            const result = document.getElementById('accreditedResult');
-            
-            checkbox.checked = true;
-            checkAccreditedStatus();
-            if (result.style.display === 'none') throw new Error('Result should show');
-            
-            checkbox.checked = false;
-            checkAccreditedStatus();
-        });
 
         // ============================================
         // INITIALIZATION
