@@ -789,6 +789,7 @@
             }
 
             .triangle-container {
+                display: block !important;
                 max-width: 400px !important;
                 margin: 0 auto 30px !important;
                 page-break-inside: avoid !important;
@@ -800,11 +801,14 @@
 
             .print-only-image {
                 display: block !important;
-                width: 100% !important;
-                max-width: 400px !important;
-                height: auto !important;
+                visibility: visible !important;
+                width: 400px !important;
+                height: 400px !important;
+                max-width: 100% !important;
                 margin: 0 auto !important;
                 border: 1px solid #ddd !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             .score-breakdown {
@@ -1689,7 +1693,7 @@
                 <!-- Triangle Visualization -->
                 <div class="triangle-container">
                     <canvas id="triangleCanvas" width="500" height="500"></canvas>
-                    <img id="trianglePrintImage" class="print-only-image" alt="Portfolio Triangle">
+                    <img id="trianglePrintImage" class="print-only-image" alt="Portfolio Triangle" width="400" height="400">
                 </div>
 
                 <!-- Score Breakdown -->
@@ -2316,12 +2320,25 @@
             // Convert canvas to image for print (canvas doesn't always render in print)
             const canvas = document.getElementById('triangleCanvas');
             const printImage = document.getElementById('trianglePrintImage');
-            printImage.src = canvas.toDataURL('image/png');
             
-            // Small delay to ensure modal is closed and image is loaded
-            setTimeout(() => {
-                window.print();
-            }, 200);
+            // Create data URL from canvas
+            const dataURL = canvas.toDataURL('image/png');
+            
+            // Set up print trigger
+            let hasPrinted = false;
+            const triggerPrint = () => {
+                if (!hasPrinted) {
+                    hasPrinted = true;
+                    setTimeout(() => window.print(), 100);
+                }
+            };
+            
+            // Set onload handler before setting src
+            printImage.onload = triggerPrint;
+            printImage.src = dataURL;
+            
+            // Fallback timeout in case onload doesn't fire
+            setTimeout(triggerPrint, 500);
         }
 
         function shareViaEmail() {
