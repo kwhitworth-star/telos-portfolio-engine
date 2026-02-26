@@ -194,6 +194,14 @@ let sNew = center + (s - center) * spreadFactor;
 - Print footer includes Trivium contact information
 - Modal closes when clicking outside
 
+#### Task 11: Multi-Page PDF Enhancement ✅
+- Enhanced print styles for multi-page PDF output:
+  - **Triangle visualization**: Included with page-break-inside: avoid
+  - **Accredited investor section**: Full display including checkboxes and result
+  - **Custom checkbox styling**: Visual indicators (teal fill + white checkmark) for checked state
+  - **Page break controls**: Strategic placement to prevent content splitting
+- Print footer with Trivium Asset Management Partners contact info
+
 ---
 
 ## Session Complete ✅
@@ -204,6 +212,7 @@ All tasks completed successfully. The TELOS Portfolio Purpose Engine is fully fu
 - Asset allocation recommendations
 - Accredited investor qualification flow
 - Professional share modal with print/email/SMS options
+- Multi-page PDF with triangle and accredited investor sections
 - Trivium Asset Management Partners integration
 - Comprehensive test suite
 - Full documentation

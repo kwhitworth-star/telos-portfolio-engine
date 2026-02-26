@@ -776,7 +776,6 @@
             .test-runner,
             .modal-overlay,
             .action-buttons,
-            .accredited-section,
             .navigation {
                 display: none !important;
             }
@@ -790,8 +789,9 @@
             }
 
             .triangle-container {
-                max-width: 350px !important;
-                margin: 0 auto 20px !important;
+                max-width: 400px !important;
+                margin: 0 auto 30px !important;
+                page-break-inside: avoid !important;
             }
 
             #triangleCanvas {
@@ -799,7 +799,8 @@
             }
 
             .score-breakdown {
-                margin-bottom: 20px !important;
+                margin-bottom: 30px !important;
+                page-break-inside: avoid !important;
             }
 
             .score-label {
@@ -816,6 +817,7 @@
                 background: #f5f5f5 !important;
                 border-left: 3px solid #4fd1c5 !important;
                 page-break-inside: avoid !important;
+                margin-bottom: 30px !important;
             }
 
             .interpretation-title {
@@ -830,6 +832,7 @@
                 background: #f5f5f5 !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
+                margin-bottom: 30px !important;
             }
 
             .allocation-title {
@@ -852,6 +855,81 @@
                 color: #666 !important;
             }
 
+            /* Accredited Investor Section - Print Styles */
+            .accredited-section {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+                margin-bottom: 30px !important;
+            }
+
+            .accredited-title {
+                color: #1a1a1a !important;
+            }
+
+            .accredited-intro {
+                color: #333 !important;
+            }
+
+            .checkbox-option {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                display: flex !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+            }
+
+            .checkbox-option input[type="checkbox"] {
+                -webkit-appearance: none !important;
+                appearance: none !important;
+                width: 18px !important;
+                height: 18px !important;
+                min-width: 18px !important;
+                border: 2px solid #999 !important;
+                border-radius: 3px !important;
+                background: white !important;
+                position: relative !important;
+                flex-shrink: 0 !important;
+            }
+
+            .checkbox-option input[type="checkbox"]:checked {
+                background: #4fd1c5 !important;
+                border-color: #4fd1c5 !important;
+            }
+
+            .checkbox-option input[type="checkbox"]:checked::after {
+                content: "✓" !important;
+                position: absolute !important;
+                color: white !important;
+                font-size: 14px !important;
+                font-weight: bold !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+            }
+
+            .checkbox-label {
+                color: #333 !important;
+            }
+
+            .accredited-result {
+                page-break-inside: avoid !important;
+            }
+
+            .accredited-result.qualified {
+                background: #e8f5e9 !important;
+                border: 1px solid #4caf50 !important;
+            }
+
+            .accredited-result.not-qualified {
+                background: #fff3e0 !important;
+                border: 1px solid #ff9800 !important;
+            }
+
+            .accredited-result-text {
+                color: #333 !important;
+            }
+
             .print-footer {
                 display: block !important;
                 margin-top: 30px;
@@ -860,6 +938,7 @@
                 text-align: center;
                 font-size: 0.9rem;
                 color: #666;
+                page-break-inside: avoid !important;
             }
 
             .print-footer a {
