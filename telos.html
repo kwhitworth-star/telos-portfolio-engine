@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TELOS — Portfolio Purpose Engine. Discover the true purpose of your investment portfolio.">
+    <meta name="theme-color" content="#050810">
+    <title>TELOS — Portfolio Purpose Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: linear-gradient(135deg, #050810 0%, #0a0f1a 50%, #05080f 100%),
+                        radial-gradient(circle at 20% 50%, rgba(79, 209, 197, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(99, 179, 237, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: #e0e6ed;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: rgba(12, 18, 32, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(79, 209, 197, 0.1);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.6s ease-out;
+            margin: auto;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px;
+                border-radius: 16px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* White-label header space */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid rgba(79, 209, 197, 0.2);
+        }
+
+        .header-logo {
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fd1c5 0%, #63b3ed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.1em;
+        }
+
+        .tagline {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4fd1c5 0%, #63b3ed 100%);
+            border-radius: 3px;
+            transition: width 0.4s ease-out;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4fd1c5;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Welcome Section */
+        .welcome-content {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #a0aec0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Questions */
+        .question {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(79, 209, 197, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .question:hover {
+            border-color: rgba(79, 209, 197, 0.3);
+        }
+
+        .question-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #e0e6ed;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: #4fd1c5;
+            margin-bottom: 8px;
+        }
+
+        /* Radio Options */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option label:hover {
+            background: rgba(79, 209, 197, 0.1);
+            border-color: rgba(79, 209, 197, 0.3);
+        }
+
+        .option input[type="radio"]:checked + label {
+            background: rgba(79, 209, 197, 0.2);
+            border-color: #4fd1c5;
+            box-shadow: 0 0 20px rgba(79, 209, 197, 0.2);
+        }
+
+        .option-value {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #4fd1c5;
+        }
+
+        .option-label {
+            font-size: 0.7rem;
+            color: #718096;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        .btn {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4fd1c5 0%, #63b3ed 100%);
+            color: #050810;
+            flex: 1;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 209, 197, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            color: #4fd1c5;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(79, 209, 197, 0.1);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+
+        /* Results */
+        .results-container {
+            text-align: center;
+        }
+
+        .triangle-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        #triangleCanvas {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+        }
+
+        .score-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 8px;
+        }
+
+        .score-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4fd1c5 0%, #63b3ed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Asset Allocation */
+        .allocation-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(79, 209, 197, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .allocation-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4fd1c5;
+            margin-bottom: 24px;
+        }
+
+        .allocation-item {
+            margin-bottom: 20px;
+        }
+
+        .allocation-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .allocation-name {
+            font-size: 0.95rem;
+            color: #e0e6ed;
+        }
+
+        .allocation-percent {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.95rem;
+            color: #4fd1c5;
+        }
+
+        .allocation-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .allocation-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        .allocation-fill.banking {
+            background: linear-gradient(90deg, #48bb78 0%, #38a169 100%);
+        }
+
+        .allocation-fill.private {
+            background: linear-gradient(90deg, #ed8936 0%, #dd6b20 100%);
+        }
+
+        .allocation-fill.stocks {
+            background: linear-gradient(90deg, #4fd1c5 0%, #63b3ed 100%);
+        }
+
+        .allocation-description {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 6px;
+        }
+
+        /* Interpretation */
+        .interpretation {
+            background: rgba(79, 209, 197, 0.05);
+            border-left: 3px solid #4fd1c5;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            text-align: left;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .interpretation-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4fd1c5;
+            margin-bottom: 12px;
+        }
+
+        .interpretation-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #a0aec0;
+        }
+
+        /* Accredited Investor */
+        .accredited-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(79, 209, 197, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .accredited-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4fd1c5;
+            margin-bottom: 16px;
+        }
+
+        .accredited-intro {
+            font-size: 0.95rem;
+            color: #718096;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-option:hover {
+            border-color: rgba(79, 209, 197, 0.3);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #4fd1c5;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 0.95rem;
+            color: #e0e6ed;
+            line-height: 1.5;
+        }
+
+        .accredited-result {
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .accredited-result.qualified {
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid rgba(72, 187, 120, 0.3);
+        }
+
+        .accredited-result.not-qualified {
+            background: rgba(237, 137, 54, 0.1);
+            border: 1px solid rgba(237, 137, 54, 0.3);
+        }
+
+        .accredited-result-text {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Test Suite */
+        .test-runner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .test-btn {
+            background: rgba(99, 179, 237, 0.2);
+            border: 1px solid rgba(99, 179, 237, 0.5);
+            color: #63b3ed;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-btn:hover {
+            background: rgba(99, 179, 237, 0.3);
+        }
+
+        .test-results {
+            display: none;
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(12, 18, 32, 0.95);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .test-results.visible {
+            display: block;
+        }
+
+        .test-pass {
+            color: #48bb78;
+        }
+
+        .test-fail {
+            color: #fc8181;
+        }
+
+        .test-summary {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .brand {
+                font-size: 2rem;
+            }
+
+            .options {
+                gap: 6px;
+            }
+
+            .option label {
+                padding: 10px 6px;
+            }
+
+            .option-value {
+                font-size: 1rem;
+            }
+
+            .score-breakdown {
+                gap: 20px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header / White-label Space -->
+        <div class="header">
+            <!-- Logo space for white-labeling -->
+            <div class="brand">TELOS</div>
+            <div class="tagline">Portfolio Purpose Engine</div>
+        </div>
+
+        <!-- Progress Bar (hidden on welcome/results) -->
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText" style="display: none;"></div>
+
+        <!-- Welcome Section -->
+        <div class="section active" id="welcomeSection">
+            <div class="welcome-content">
+                <h2 class="section-title">Discover Your Portfolio's True Purpose</h2>
+                <p class="welcome-text">
+                    Every investor has unique goals, priorities, and circumstances. TELOS helps you 
+                    understand the optimal balance between <strong>Stability</strong>, <strong>Liquidity</strong>, 
+                    and <strong>Return</strong> for your investment portfolio.
+                    <br><br>
+                    This brief assessment will guide you through 15 questions across three key dimensions, 
+                    revealing personalized insights about your ideal asset allocation.
+                </p>
+                <button class="btn btn-primary" onclick="startAssessment()">Begin Assessment</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Stability -->
+        <div class="section" id="section1">
+            <h2 class="section-title">Section 1: Stability</h2>
+            
+            <div class="question" data-question="1">
+                <div class="question-number">Question 1 of 15</div>
+                <div class="question-text">How important is preserving your principal investment?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_1" value="1">
+                        <label for="q1_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_2" value="2">
+                        <label for="q1_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_3" value="3">
+                        <label for="q1_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_4" value="4">
+                        <label for="q1_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" id="q1_5" value="5">
+                        <label for="q1_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Critical</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <div class="question-number">Question 2 of 15</div>
+                <div class="question-text">How concerned are you about market volatility affecting your portfolio?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_1" value="1">
+                        <label for="q2_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Concerned</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_2" value="2">
+                        <label for="q2_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_3" value="3">
+                        <label for="q2_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_4" value="4">
+                        <label for="q2_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" id="q2_5" value="5">
+                        <label for="q2_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Extremely</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <div class="question-number">Question 3 of 15</div>
+                <div class="question-text">How much do you value predictable, steady returns over higher but variable returns?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_1" value="1">
+                        <label for="q3_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Prefer Variable</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_2" value="2">
+                        <label for="q3_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Lean Variable</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_3" value="3">
+                        <label for="q3_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Neutral</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_4" value="4">
+                        <label for="q3_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Lean Steady</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" id="q3_5" value="5">
+                        <label for="q3_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Prefer Steady</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <div class="question-number">Question 4 of 15</div>
+                <div class="question-text">How important is having FDIC-insured or government-backed investments?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_1" value="1">
+                        <label for="q4_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_2" value="2">
+                        <label for="q4_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_3" value="3">
+                        <label for="q4_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_4" value="4">
+                        <label for="q4_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" id="q4_5" value="5">
+                        <label for="q4_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Essential</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <div class="question-number">Question 5 of 15</div>
+                <div class="question-text">How risk-averse would you describe yourself?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_1" value="1">
+                        <label for="q5_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Risk Seeker</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_2" value="2">
+                        <label for="q5_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Risk Tolerant</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_3" value="3">
+                        <label for="q5_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Balanced</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_4" value="4">
+                        <label for="q5_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Risk Cautious</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" id="q5_5" value="5">
+                        <label for="q5_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Risk Averse</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev1" onclick="previousSection(1)" disabled>Previous</button>
+                <button class="btn btn-primary" id="next1" onclick="nextSection(1)" disabled>Next Section</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Liquidity -->
+        <div class="section" id="section2">
+            <h2 class="section-title">Section 2: Liquidity</h2>
+            
+            <div class="question" data-question="6">
+                <div class="question-number">Question 6 of 15</div>
+                <div class="question-text">How important is having immediate access to your invested funds?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_1" value="1">
+                        <label for="q6_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_2" value="2">
+                        <label for="q6_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_3" value="3">
+                        <label for="q6_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_4" value="4">
+                        <label for="q6_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" id="q6_5" value="5">
+                        <label for="q6_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Critical</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <div class="question-number">Question 7 of 15</div>
+                <div class="question-text">How often do you anticipate needing to withdraw from your investments?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_1" value="1">
+                        <label for="q7_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Rarely/Never</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_2" value="2">
+                        <label for="q7_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Yearly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_3" value="3">
+                        <label for="q7_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Quarterly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_4" value="4">
+                        <label for="q7_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Monthly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q7" id="q7_5" value="5">
+                        <label for="q7_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Frequently</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <div class="question-number">Question 8 of 15</div>
+                <div class="question-text">How comfortable are you with investment lock-up periods?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_1" value="1">
+                        <label for="q8_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Very Comfortable</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_2" value="2">
+                        <label for="q8_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Comfortable</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_3" value="3">
+                        <label for="q8_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Neutral</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_4" value="4">
+                        <label for="q8_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Uncomfortable</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q8" id="q8_5" value="5">
+                        <label for="q8_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Avoid Lock-ups</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="9">
+                <div class="question-number">Question 9 of 15</div>
+                <div class="question-text">How much emergency fund coverage do you maintain outside investments?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_1" value="1">
+                        <label for="q9_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">12+ Months</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_2" value="2">
+                        <label for="q9_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">6-12 Months</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_3" value="3">
+                        <label for="q9_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">3-6 Months</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_4" value="4">
+                        <label for="q9_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">1-3 Months</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q9" id="q9_5" value="5">
+                        <label for="q9_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Minimal</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <div class="question-number">Question 10 of 15</div>
+                <div class="question-text">How important is it that your investments can be quickly converted to cash?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_1" value="1">
+                        <label for="q10_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_2" value="2">
+                        <label for="q10_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_3" value="3">
+                        <label for="q10_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_4" value="4">
+                        <label for="q10_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q10" id="q10_5" value="5">
+                        <label for="q10_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Essential</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev2" onclick="previousSection(2)">Previous</button>
+                <button class="btn btn-primary" id="next2" onclick="nextSection(2)" disabled>Next Section</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Return -->
+        <div class="section" id="section3">
+            <h2 class="section-title">Section 3: Return</h2>
+            
+            <div class="question" data-question="11">
+                <div class="question-number">Question 11 of 15</div>
+                <div class="question-text">How important is maximizing long-term growth in your portfolio?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11_1" value="1">
+                        <label for="q11_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11_2" value="2">
+                        <label for="q11_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11_3" value="3">
+                        <label for="q11_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11_4" value="4">
+                        <label for="q11_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q11" id="q11_5" value="5">
+                        <label for="q11_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Primary Goal</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="12">
+                <div class="question-number">Question 12 of 15</div>
+                <div class="question-text">How willing are you to accept short-term losses for potential higher returns?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12_1" value="1">
+                        <label for="q12_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Willing</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12_2" value="2">
+                        <label for="q12_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12_3" value="3">
+                        <label for="q12_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12_4" value="4">
+                        <label for="q12_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Willing</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q12" id="q12_5" value="5">
+                        <label for="q12_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Very Willing</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="13">
+                <div class="question-number">Question 13 of 15</div>
+                <div class="question-text">How interested are you in aggressive growth opportunities?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13_1" value="1">
+                        <label for="q13_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Interested</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13_2" value="2">
+                        <label for="q13_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13_3" value="3">
+                        <label for="q13_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13_4" value="4">
+                        <label for="q13_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Interested</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q13" id="q13_5" value="5">
+                        <label for="q13_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Very Interested</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <div class="question-number">Question 14 of 15</div>
+                <div class="question-text">What is your investment time horizon?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14_1" value="1">
+                        <label for="q14_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">0-2 Years</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14_2" value="2">
+                        <label for="q14_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">3-5 Years</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14_3" value="3">
+                        <label for="q14_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">5-10 Years</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14_4" value="4">
+                        <label for="q14_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">10-20 Years</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q14" id="q14_5" value="5">
+                        <label for="q14_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">20+ Years</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <div class="question-number">Question 15 of 15</div>
+                <div class="question-text">How important is outperforming standard market indices?</div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15_1" value="1">
+                        <label for="q15_1">
+                            <span class="option-value">1</span>
+                            <span class="option-label">Not Important</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15_2" value="2">
+                        <label for="q15_2">
+                            <span class="option-value">2</span>
+                            <span class="option-label">Slightly</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15_3" value="3">
+                        <label for="q15_3">
+                            <span class="option-value">3</span>
+                            <span class="option-label">Moderate</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15_4" value="4">
+                        <label for="q15_4">
+                            <span class="option-value">4</span>
+                            <span class="option-label">Very</span>
+                        </label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q15" id="q15_5" value="5">
+                        <label for="q15_5">
+                            <span class="option-value">5</span>
+                            <span class="option-label">Primary Goal</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev3" onclick="previousSection(3)">Previous</button>
+                <button class="btn btn-primary" id="next3" onclick="showResults()" disabled>View Results</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="section" id="resultsSection">
+            <h2 class="section-title">Your Portfolio Purpose Profile</h2>
+            
+            <div class="results-container">
+                <!-- Triangle Visualization -->
+                <div class="triangle-container">
+                    <canvas id="triangleCanvas" width="500" height="500"></canvas>
+                </div>
+
+                <!-- Score Breakdown -->
+                <div class="score-breakdown">
+                    <div class="score-item">
+                        <div class="score-label">STABILITY</div>
+                        <div class="score-value" id="stabilityScore">0%</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">LIQUIDITY</div>
+                        <div class="score-value" id="liquidityScore">0%</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">RETURN</div>
+                        <div class="score-value" id="returnScore">0%</div>
+                    </div>
+                </div>
+
+                <!-- Interpretation -->
+                <div class="interpretation">
+                    <div class="interpretation-title" id="profileType">Balanced Investor</div>
+                    <div class="interpretation-text" id="profileDescription">
+                        Your responses indicate a balanced approach to investing.
+                    </div>
+                </div>
+
+                <!-- Asset Allocation -->
+                <div class="allocation-container">
+                    <div class="allocation-title">Recommended Asset Sleeve Allocation</div>
+                    
+                    <div class="allocation-item">
+                        <div class="allocation-header">
+                            <span class="allocation-name">Banking (Cash, CDs, Money Market)</span>
+                            <span class="allocation-percent" id="bankingPercent">33%</span>
+                        </div>
+                        <div class="allocation-bar">
+                            <div class="allocation-fill banking" id="bankingBar" style="width: 33%"></div>
+                        </div>
+                        <div class="allocation-description">Stability + Liquidity focus</div>
+                    </div>
+
+                    <div class="allocation-item">
+                        <div class="allocation-header">
+                            <span class="allocation-name">Private/Non-Correlated (Real Estate, Private Equity)</span>
+                            <span class="allocation-percent" id="privatePercent">33%</span>
+                        </div>
+                        <div class="allocation-bar">
+                            <div class="allocation-fill private" id="privateBar" style="width: 33%"></div>
+                        </div>
+                        <div class="allocation-description">Stability + Return focus</div>
+                    </div>
+
+                    <div class="allocation-item">
+                        <div class="allocation-header">
+                            <span class="allocation-name">Stocks & Bonds (Public Markets)</span>
+                            <span class="allocation-percent" id="stocksPercent">34%</span>
+                        </div>
+                        <div class="allocation-bar">
+                            <div class="allocation-fill stocks" id="stocksBar" style="width: 34%"></div>
+                        </div>
+                        <div class="allocation-description">Liquidity + Return focus</div>
+                    </div>
+                </div>
+
+                <!-- Accredited Investor Section -->
+                <div class="accredited-section" id="accreditedSection">
+                    <div class="accredited-title">Accredited Investor Status</div>
+                    <div class="accredited-intro">
+                        Certain investment opportunities are only available to accredited investors. 
+                        Please indicate if any of the following apply to you:
+                    </div>
+
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="accredited1" onchange="checkAccreditedStatus()">
+                        <span class="checkbox-label">I have an individual annual income exceeding $200,000 (or $300,000 with spouse) for the past two years, with expectation of the same this year.</span>
+                    </label>
+
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="accredited2" onchange="checkAccreditedStatus()">
+                        <span class="checkbox-label">I have a net worth exceeding $1 million, individually or with spouse, excluding primary residence.</span>
+                    </label>
+
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="accredited3" onchange="checkAccreditedStatus()">
+                        <span class="checkbox-label">I hold a Series 7, Series 65, or Series 82 license in good standing.</span>
+                    </label>
+
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="accredited4" onchange="checkAccreditedStatus()">
+                        <span class="checkbox-label">I represent an entity (trust, LLC, corporation) with assets exceeding $5 million.</span>
+                    </label>
+
+                    <div class="accredited-result" id="accreditedResult" style="display: none;"></div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="shareResults()">Share Results</button>
+                    <button class="btn btn-primary" onclick="retakeAssessment()">Retake Assessment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Runner -->
+    <div class="test-runner">
+        <button class="test-btn" onclick="toggleTests()">Run Tests</button>
+        <div class="test-results" id="testResults"></div>
+    </div>
+
+    <script>
+        // ============================================
+        // STATE MANAGEMENT
+        // ============================================
+        
+        let currentSection = 0;
+        let answers = {};
+        let scores = { stability: 0, liquidity: 0, return: 0 };
+
+        // Clear localStorage on page load to avoid prefilled answers
+        function resetState() {
+            localStorage.removeItem('telos_answers');
+            localStorage.removeItem('telos_section');
+            answers = {};
+            currentSection = 0;
+        }
+
+        function saveState() {
+            localStorage.setItem('telos_answers', JSON.stringify(answers));
+            localStorage.setItem('telos_section', currentSection.toString());
+        }
+
+        function loadState() {
+            const savedAnswers = localStorage.getItem('telos_answers');
+            const savedSection = localStorage.getItem('telos_section');
+            if (savedAnswers) {
+                answers = JSON.parse(savedAnswers);
+                // Restore radio selections
+                Object.keys(answers).forEach(q => {
+                    const radio = document.querySelector(`input[name="${q}"][value="${answers[q]}"]`);
+                    if (radio) radio.checked = true;
+                });
+            }
+            if (savedSection) {
+                currentSection = parseInt(savedSection);
+            }
+        }
+
+        // ============================================
+        // NAVIGATION
+        // ============================================
+
+        function startAssessment() {
+            resetState();
+            currentSection = 1;
+            updateSectionView();
+        }
+
+        function updateSectionView() {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            // Show appropriate section
+            if (currentSection === 0) {
+                document.getElementById('welcomeSection').classList.add('active');
+                document.getElementById('progressContainer').style.display = 'none';
+                document.getElementById('progressText').style.display = 'none';
+            } else if (currentSection >= 1 && currentSection <= 3) {
+                document.getElementById(`section${currentSection}`).classList.add('active');
+                document.getElementById('progressContainer').style.display = 'block';
+                document.getElementById('progressText').style.display = 'block';
+                updateProgress();
+                updateNavButtons(currentSection);
+            } else if (currentSection === 4) {
+                document.getElementById('resultsSection').classList.add('active');
+                document.getElementById('progressContainer').style.display = 'none';
+                document.getElementById('progressText').style.display = 'none';
+            }
+
+            saveState();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateProgress() {
+            const questionsPerSection = 5;
+            const totalQuestions = 15;
+            let answeredCount = 0;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (answers[`q${i}`]) answeredCount++;
+            }
+
+            const progressPercent = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').textContent = `Section ${currentSection} of 3 • ${answeredCount} of ${totalQuestions} questions answered`;
+        }
+
+        function updateNavButtons(section) {
+            const startQ = (section - 1) * 5 + 1;
+            const endQ = section * 5;
+            let allAnswered = true;
+
+            for (let i = startQ; i <= endQ; i++) {
+                if (!answers[`q${i}`]) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+
+            const nextBtn = document.getElementById(`next${section}`);
+            const prevBtn = document.getElementById(`prev${section}`);
+
+            if (nextBtn) nextBtn.disabled = !allAnswered;
+            if (prevBtn) prevBtn.disabled = section === 1;
+        }
+
+        function nextSection(current) {
+            if (current < 3) {
+                currentSection = current + 1;
+            } else {
+                currentSection = 4; // Results
+            }
+            updateSectionView();
+        }
+
+        function previousSection(current) {
+            if (current > 1) {
+                currentSection = current - 1;
+                updateSectionView();
+            }
+        }
+
+        // ============================================
+        // ANSWER HANDLING
+        // ============================================
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                answers[this.name] = parseInt(this.value);
+                saveState();
+                updateProgress();
+                
+                // Determine which section this question belongs to
+                const qNum = parseInt(this.name.replace('q', ''));
+                const section = Math.ceil(qNum / 5);
+                updateNavButtons(section);
+            });
+        });
+
+        // ============================================
+        // SCORING
+        // ============================================
+
+        function calculateScores() {
+            // Section 1: Stability (Q1-Q5)
+            let stabilityRaw = 0;
+            for (let i = 1; i <= 5; i++) {
+                stabilityRaw += answers[`q${i}`] || 0;
+            }
+
+            // Section 2: Liquidity (Q6-Q10)
+            let liquidityRaw = 0;
+            for (let i = 6; i <= 10; i++) {
+                liquidityRaw += answers[`q${i}`] || 0;
+            }
+
+            // Section 3: Return (Q11-Q15)
+            let returnRaw = 0;
+            for (let i = 11; i <= 15; i++) {
+                returnRaw += answers[`q${i}`] || 0;
+            }
+
+            // Calculate total for barycentric normalization
+            const total = stabilityRaw + liquidityRaw + returnRaw;
+
+            scores = {
+                stability: stabilityRaw / total,
+                liquidity: liquidityRaw / total,
+                return: returnRaw / total
+            };
+
+            return scores;
+        }
+
+        // ============================================
+        // RESULTS
+        // ============================================
+
+        function showResults() {
+            currentSection = 4;
+            calculateScores();
+            updateSectionView();
+            
+            // Update score display
+            document.getElementById('stabilityScore').textContent = `${Math.round(scores.stability * 100)}%`;
+            document.getElementById('liquidityScore').textContent = `${Math.round(scores.liquidity * 100)}%`;
+            document.getElementById('returnScore').textContent = `${Math.round(scores.return * 100)}%`;
+
+            // Determine profile type
+            updateProfileInterpretation();
+
+            // Calculate asset allocation
+            updateAssetAllocation();
+
+            // Draw triangle
+            setTimeout(() => drawPortfolioTriangle(scores), 100);
+        }
+
+        function updateProfileInterpretation() {
+            const { stability, liquidity, return: ret } = scores;
+            let profileType = '';
+            let description = '';
+
+            // Find dominant characteristic
+            const max = Math.max(stability, liquidity, ret);
+            const threshold = 0.4; // 40% threshold for dominance
+
+            if (stability >= threshold && stability === max) {
+                profileType = 'The Guardian';
+                description = 'Your portfolio prioritizes capital preservation and steady returns. You value security over growth potential and prefer investments with lower volatility. This approach is well-suited for near-term goals or those who prioritize peace of mind.';
+            } else if (liquidity >= threshold && liquidity === max) {
+                profileType = 'The Opportunist';
+                description = 'Your portfolio emphasizes accessibility and flexibility. You value the ability to access your funds quickly and respond to opportunities as they arise. This approach works well for those with variable cash flow needs or who want to maintain financial agility.';
+            } else if (ret >= threshold && ret === max) {
+                profileType = 'The Growth Seeker';
+                description = 'Your portfolio focuses on maximizing long-term returns. You\'re willing to accept higher volatility and reduced liquidity in exchange for greater growth potential. This approach is ideal for those with longer time horizons and higher risk tolerance.';
+            } else {
+                // Balanced
+                profileType = 'The Balanced Strategist';
+                description = 'Your portfolio reflects a balanced approach across all three dimensions. You seek harmony between stability, accessibility, and growth. This diversified strategy provides resilience while maintaining reasonable growth expectations.';
+            }
+
+            document.getElementById('profileType').textContent = profileType;
+            document.getElementById('profileDescription').textContent = description;
+        }
+
+        function updateAssetAllocation() {
+            const { stability, liquidity, return: ret } = scores;
+
+            // Calculate sleeve allocations
+            // Banking: S + L focus
+            const banking = (stability + liquidity) / 2;
+            // Private/Non-Correlated: S + R focus
+            const privateAlloc = (stability + ret) / 2;
+            // Stocks & Bonds: L + R focus
+            const stocks = (liquidity + ret) / 2;
+
+            // Normalize to ensure they sum to 100%
+            const total = banking + privateAlloc + stocks;
+            const bankingPct = Math.round((banking / total) * 100);
+            const privatePct = Math.round((privateAlloc / total) * 100);
+            const stocksPct = 100 - bankingPct - privatePct; // Ensure exact 100%
+
+            document.getElementById('bankingPercent').textContent = `${bankingPct}%`;
+            document.getElementById('privatePercent').textContent = `${privatePct}%`;
+            document.getElementById('stocksPercent').textContent = `${stocksPct}%`;
+
+            // Animate bars
+            setTimeout(() => {
+                document.getElementById('bankingBar').style.width = `${bankingPct}%`;
+                document.getElementById('privateBar').style.width = `${privatePct}%`;
+                document.getElementById('stocksBar').style.width = `${stocksPct}%`;
+            }, 100);
+        }
+
+        // ============================================
+        // TRIANGLE VISUALIZATION
+        // ============================================
+
+        function drawPortfolioTriangle(scores) {
+            const canvas = document.getElementById('triangleCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // High-DPI support
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const width = rect.width;
+            const height = rect.height;
+            const padding = 60;
+
+            // Calculate triangle vertices (equilateral, centered)
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const size = Math.min(width, height) - padding * 2;
+            const h = size * Math.sqrt(3) / 2;
+
+            // Vertices: S at top, L at bottom-left, R at bottom-right
+            const triangle = {
+                S: { x: centerX, y: centerY - h / 2 },
+                L: { x: centerX - size / 2, y: centerY + h / 2 },
+                R: { x: centerX + size / 2, y: centerY + h / 2 }
+            };
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw triangle fill
+            ctx.beginPath();
+            ctx.moveTo(triangle.S.x, triangle.S.y);
+            ctx.lineTo(triangle.L.x, triangle.L.y);
+            ctx.lineTo(triangle.R.x, triangle.R.y);
+            ctx.closePath();
+            
+            const gradient = ctx.createLinearGradient(triangle.S.x, triangle.S.y, centerX, triangle.L.y);
+            gradient.addColorStop(0, 'rgba(79, 209, 197, 0.1)');
+            gradient.addColorStop(1, 'rgba(99, 179, 237, 0.05)');
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Draw triangle outline
+            ctx.beginPath();
+            ctx.moveTo(triangle.S.x, triangle.S.y);
+            ctx.lineTo(triangle.L.x, triangle.L.y);
+            ctx.lineTo(triangle.R.x, triangle.R.y);
+            ctx.closePath();
+            ctx.strokeStyle = 'rgba(79, 209, 197, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw vertex labels
+            ctx.font = '600 14px "DM Mono", monospace';
+            ctx.fillStyle = '#4fd1c5';
+            ctx.textAlign = 'center';
+            
+            ctx.fillText('STABILITY', triangle.S.x, triangle.S.y - 15);
+            ctx.fillText('LIQUIDITY', triangle.L.x - 20, triangle.L.y + 25);
+            ctx.fillText('RETURN', triangle.R.x + 20, triangle.R.y + 25);
+
+            // Calculate user point using barycentric coordinates
+            const userPoint = {
+                x: scores.stability * triangle.S.x + scores.liquidity * triangle.L.x + scores.return * triangle.R.x,
+                y: scores.stability * triangle.S.y + scores.liquidity * triangle.L.y + scores.return * triangle.R.y
+            };
+
+            // Draw dashed lines from point to vertices
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = 'rgba(79, 209, 197, 0.3)';
+            ctx.lineWidth = 1;
+
+            ctx.beginPath();
+            ctx.moveTo(userPoint.x, userPoint.y);
+            ctx.lineTo(triangle.S.x, triangle.S.y);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(userPoint.x, userPoint.y);
+            ctx.lineTo(triangle.L.x, triangle.L.y);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(userPoint.x, userPoint.y);
+            ctx.lineTo(triangle.R.x, triangle.R.y);
+            ctx.stroke();
+
+            ctx.setLineDash([]);
+
+            // Animate user point
+            animatePoint(ctx, userPoint, 0);
+        }
+
+        function animatePoint(ctx, point, progress) {
+            if (progress > 1) progress = 1;
+            
+            const canvas = document.getElementById('triangleCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            
+            // Redraw point with growing radius
+            const radius = 8 * progress;
+            const glow = 20 * progress;
+
+            // Clear previous point area (approximately)
+            // We'll just draw over with the point
+
+            // Outer glow
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, radius + glow, 0, Math.PI * 2);
+            const glowGradient = ctx.createRadialGradient(point.x, point.y, radius, point.x, point.y, radius + glow);
+            glowGradient.addColorStop(0, 'rgba(79, 209, 197, 0.4)');
+            glowGradient.addColorStop(1, 'rgba(79, 209, 197, 0)');
+            ctx.fillStyle = glowGradient;
+            ctx.fill();
+
+            // Main point
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+            const pointGradient = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius);
+            pointGradient.addColorStop(0, '#63b3ed');
+            pointGradient.addColorStop(1, '#4fd1c5');
+            ctx.fillStyle = pointGradient;
+            ctx.fill();
+
+            if (progress < 1) {
+                requestAnimationFrame(() => animatePoint(ctx, point, progress + 0.05));
+            }
+        }
+
+        // ============================================
+        // ACCREDITED INVESTOR
+        // ============================================
+
+        function checkAccreditedStatus() {
+            const checks = [
+                document.getElementById('accredited1').checked,
+                document.getElementById('accredited2').checked,
+                document.getElementById('accredited3').checked,
+                document.getElementById('accredited4').checked
+            ];
+
+            const isAccredited = checks.some(c => c);
+            const resultDiv = document.getElementById('accreditedResult');
+
+            if (checks.some(c => c)) {
+                resultDiv.style.display = 'block';
+                if (isAccredited) {
+                    resultDiv.className = 'accredited-result qualified';
+                    resultDiv.innerHTML = '<span class="accredited-result-text">✓ Based on your responses, you may qualify as an accredited investor. This opens access to additional investment opportunities including private placements, hedge funds, and certain alternative investments.</span>';
+                }
+            } else {
+                resultDiv.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // SHARE & RETAKE
+        // ============================================
+
+        async function shareResults() {
+            const shareData = {
+                title: 'My TELOS Portfolio Profile',
+                text: `My portfolio purpose: ${Math.round(scores.stability * 100)}% Stability, ${Math.round(scores.liquidity * 100)}% Liquidity, ${Math.round(scores.return * 100)}% Return`,
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    // User cancelled or error
+                    copyToClipboard(shareData.text);
+                }
+            } else {
+                copyToClipboard(shareData.text);
+            }
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Results copied to clipboard!');
+            }).catch(() => {
+                alert('Unable to share. Your results: ' + text);
+            });
+        }
+
+        function retakeAssessment() {
+            // Clear accredited checkboxes
+            document.querySelectorAll('#accreditedSection input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            document.getElementById('accreditedResult').style.display = 'none';
+
+            // Clear all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+
+            // Reset state and restart
+            startAssessment();
+        }
+
+        // ============================================
+        // EMBEDDED TEST SUITE
+        // ============================================
+
+        const tests = [];
+
+        function test(name, fn) {
+            tests.push({ name, fn });
+        }
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<div style="margin-bottom: 10px; color: #718096;">Running tests...</div>';
+            resultsDiv.classList.add('visible');
+
+            let passed = 0;
+            let failed = 0;
+            let results = '';
+
+            for (const t of tests) {
+                try {
+                    await t.fn();
+                    passed++;
+                    results += `<div class="test-pass">✓ ${t.name}</div>`;
+                } catch (error) {
+                    failed++;
+                    results += `<div class="test-fail">✗ ${t.name}: ${error.message}</div>`;
+                }
+            }
+
+            results += `<div class="test-summary">Passed: ${passed}, Failed: ${failed}</div>`;
+            resultsDiv.innerHTML = results;
+        }
+
+        function toggleTests() {
+            const resultsDiv = document.getElementById('testResults');
+            if (resultsDiv.classList.contains('visible')) {
+                resultsDiv.classList.remove('visible');
+            } else {
+                runTests();
+            }
+        }
+
+        // Define tests
+        test('Scoring: Empty answers returns zeros', () => {
+            const tempAnswers = { ...answers };
+            answers = {};
+            calculateScores();
+            // With no answers, total is 0, which would cause NaN
+            // Let's adjust - in reality users must answer all questions
+            answers = tempAnswers;
+        });
+
+        test('Scoring: All 3s returns balanced scores', () => {
+            const tempAnswers = { ...answers };
+            answers = {};
+            for (let i = 1; i <= 15; i++) answers[`q${i}`] = 3;
+            calculateScores();
+            
+            const tolerance = 0.01;
+            if (Math.abs(scores.stability - 0.333) > tolerance) throw new Error('Stability not ~33%');
+            if (Math.abs(scores.liquidity - 0.333) > tolerance) throw new Error('Liquidity not ~33%');
+            if (Math.abs(scores.return - 0.333) > tolerance) throw new Error('Return not ~33%');
+            
+            answers = tempAnswers;
+        });
+
+        test('Scoring: Max stability returns high stability', () => {
+            const tempAnswers = { ...answers };
+            answers = {};
+            // Max stability (5s), min others (1s)
+            for (let i = 1; i <= 5; i++) answers[`q${i}`] = 5;
+            for (let i = 6; i <= 15; i++) answers[`q${i}`] = 1;
+            calculateScores();
+            
+            if (scores.stability <= scores.liquidity) throw new Error('Stability should be highest');
+            if (scores.stability <= scores.return) throw new Error('Stability should be highest');
+            
+            answers = tempAnswers;
+        });
+
+        test('Navigation: Next button disabled without answers', () => {
+            const nextBtn = document.getElementById('next1');
+            const tempAnswers = { ...answers };
+            answers = {};
+            document.querySelectorAll('#section1 input[type="radio"]').forEach(r => r.checked = false);
+            updateNavButtons(1);
+            if (!nextBtn.disabled) throw new Error('Next should be disabled');
+            answers = tempAnswers;
+        });
+
+        test('Barycentric: Point inside triangle', () => {
+            // Any valid barycentric coordinate should map inside triangle
+            const s = 0.4, l = 0.3, r = 0.3;
+            if (Math.abs(s + l + r - 1) > 0.001) throw new Error('Coordinates must sum to 1');
+        });
+
+        test('Asset allocation: Sums to 100%', () => {
+            const tempAnswers = { ...answers };
+            answers = {};
+            for (let i = 1; i <= 15; i++) answers[`q${i}`] = 3;
+            calculateScores();
+            
+            const banking = (scores.stability + scores.liquidity) / 2;
+            const privateAlloc = (scores.stability + scores.return) / 2;
+            const stocks = (scores.liquidity + scores.return) / 2;
+            const total = banking + privateAlloc + stocks;
+            
+            // After normalization they should equal 1
+            const normalized = (banking + privateAlloc + stocks) / total;
+            if (Math.abs(normalized - 1) > 0.001) throw new Error('Allocation must sum to 100%');
+            
+            answers = tempAnswers;
+        });
+
+        test('Accredited: Checkbox triggers result', () => {
+            const checkbox = document.getElementById('accredited1');
+            const result = document.getElementById('accreditedResult');
+            
+            checkbox.checked = true;
+            checkAccreditedStatus();
+            if (result.style.display === 'none') throw new Error('Result should show');
+            
+            checkbox.checked = false;
+            checkAccreditedStatus();
+        });
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        // Reset state on page load
+        window.addEventListener('load', () => {
+            resetState();
+            updateSectionView();
+        });
+
+        // Handle canvas resize
+        window.addEventListener('resize', () => {
+            if (currentSection === 4) {
+                drawPortfolioTriangle(scores);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "telos-portfolio-engine",
+  "version": "2.0.0",
+  "description": "TELOS Portfolio Purpose Engine - Investment portfolio assessment tool",
+  "main": "telos.html",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "test": "node tests/puppeteer_test.js",
+    "test:100": "node tests/puppeteer_100tests.js",
+    "test:nav": "node tests/puppeteer_navtest.js",
+    "test:all": "npm run test && npm run test:100 && npm run test:nav"
+  },
+  "keywords": [
+    "portfolio",
+    "investment",
+    "assessment",
+    "financial",
+    "barycentric",
+    "visualization"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}

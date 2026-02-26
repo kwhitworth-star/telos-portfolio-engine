@@ -1,0 +1,40 @@
+# TELOS Portfolio Purpose Engine - Dependencies
+# =============================================
+
+# Python Dependencies
+# --------------------
+# No external Python packages required.
+# The application uses only the Python standard library.
+# 
+# To serve locally, use:
+#   python3 -m http.server 8000
+#
+# To serve on a specific port:
+#   python3 -m http.server <PORT>
+
+# Node.js Dependencies (for testing)
+# ------------------------------------
+# Install via: npm install
+# See package.json for full list
+#
+# puppeteer>=21.0.0
+
+# Browser Requirements
+# --------------------
+# - Chrome 80+
+# - Firefox 75+
+# - Safari 13+
+# - Edge 80+
+# - JavaScript enabled
+# - localStorage available
+
+# Optional Development Tools
+# --------------------------
+# These are not required but helpful for development:
+#
+# Live Server (VS Code extension)
+# - ID: ritwickdey.LiveServer
+# - Provides hot reload during development
+#
+# Prettier (code formatting)
+# - npm install -g prettier
