@@ -606,6 +606,270 @@
                 width: 100%;
             }
         }
+
+        /* Share Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: rgba(12, 18, 32, 0.95);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4fd1c5;
+            margin-bottom: 10px;
+        }
+
+        .modal-subtitle {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .advisor-cta {
+            background: rgba(79, 209, 197, 0.1);
+            border: 1px solid rgba(79, 209, 197, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .advisor-cta-text {
+            font-size: 1rem;
+            color: #e0e6ed;
+            margin-bottom: 12px;
+        }
+
+        .advisor-link {
+            display: inline-block;
+            color: #4fd1c5;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .advisor-link:hover {
+            color: #63b3ed;
+        }
+
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #e0e6ed;
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background: rgba(79, 209, 197, 0.1);
+            border-color: rgba(79, 209, 197, 0.3);
+        }
+
+        .share-btn-icon {
+            font-size: 1.4rem;
+        }
+
+        .modal-close {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #718096;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #e0e6ed;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: #1a1a1a !important;
+                padding: 0 !important;
+                min-height: auto !important;
+            }
+
+            .container {
+                background: white !important;
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
+                padding: 20px !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            .header {
+                border-bottom: 2px solid #4fd1c5 !important;
+                padding-bottom: 15px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .brand {
+                color: #1a1a1a !important;
+                -webkit-text-fill-color: #1a1a1a !important;
+                background: none !important;
+            }
+
+            .tagline {
+                color: #666 !important;
+            }
+
+            .section:not(.active),
+            .progress-container,
+            .progress-text,
+            .test-runner,
+            .modal-overlay,
+            .action-buttons,
+            .accredited-section,
+            .navigation {
+                display: none !important;
+            }
+
+            #resultsSection {
+                display: block !important;
+            }
+
+            .section-title {
+                color: #1a1a1a !important;
+            }
+
+            .triangle-container {
+                max-width: 350px !important;
+                margin: 0 auto 20px !important;
+            }
+
+            #triangleCanvas {
+                border: 1px solid #ddd !important;
+            }
+
+            .score-breakdown {
+                margin-bottom: 20px !important;
+            }
+
+            .score-label {
+                color: #666 !important;
+            }
+
+            .score-value {
+                color: #1a1a1a !important;
+                -webkit-text-fill-color: #1a1a1a !important;
+                background: none !important;
+            }
+
+            .interpretation {
+                background: #f5f5f5 !important;
+                border-left: 3px solid #4fd1c5 !important;
+                page-break-inside: avoid !important;
+            }
+
+            .interpretation-title {
+                color: #1a1a1a !important;
+            }
+
+            .interpretation-text {
+                color: #333 !important;
+            }
+
+            .allocation-container {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+            }
+
+            .allocation-title {
+                color: #1a1a1a !important;
+            }
+
+            .allocation-name {
+                color: #1a1a1a !important;
+            }
+
+            .allocation-percent {
+                color: #4fd1c5 !important;
+            }
+
+            .allocation-bar {
+                background: #e0e0e0 !important;
+            }
+
+            .allocation-description {
+                color: #666 !important;
+            }
+
+            .print-footer {
+                display: block !important;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                text-align: center;
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+            .print-footer a {
+                color: #4fd1c5;
+            }
+        }
+
+        .print-footer {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -1404,10 +1668,49 @@
 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                    <button class="btn btn-secondary" onclick="shareResults()">Share Results</button>
+                    <button class="btn btn-secondary" onclick="openShareModal()">Share Results</button>
                     <button class="btn btn-primary" onclick="retakeAssessment()">Retake Assessment</button>
                 </div>
+
+                <!-- Print Footer (only visible when printing) -->
+                <div class="print-footer">
+                    <p>Generated by TELOS Portfolio Purpose Engine</p>
+                    <p>To discuss your results with an advisor, visit <a href="https://www.triviumam.com">www.triviumam.com</a></p>
+                    <p>Trivium Asset Management Partners</p>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Share Your Results</div>
+                <div class="modal-subtitle">Download or share your personalized portfolio assessment</div>
+            </div>
+
+            <div class="advisor-cta">
+                <div class="advisor-cta-text">Ready to discuss your portfolio strategy with a professional?</div>
+                <a href="https://www.triviumam.com" target="_blank" class="advisor-link">Contact Trivium Asset Management Partners →</a>
+            </div>
+
+            <div class="share-options">
+                <button class="share-btn" onclick="printResults()">
+                    <span class="share-btn-icon">🖨️</span>
+                    <span>Print / Save as PDF</span>
+                </button>
+                <button class="share-btn" onclick="shareViaEmail()">
+                    <span class="share-btn-icon">✉️</span>
+                    <span>Share via Email</span>
+                </button>
+                <button class="share-btn" onclick="shareViaSMS()">
+                    <span class="share-btn-icon">💬</span>
+                    <span>Share via SMS</span>
+                </button>
+            </div>
+
+            <button class="modal-close" onclick="closeShareModal()">Close</button>
         </div>
     </div>
 
@@ -1864,23 +2167,69 @@
         // SHARE & RETAKE
         // ============================================
 
-        async function shareResults() {
-            const shareData = {
-                title: 'My TELOS Portfolio Profile',
-                text: `My portfolio purpose: ${Math.round(scores.stability * 100)}% Stability, ${Math.round(scores.liquidity * 100)}% Liquidity, ${Math.round(scores.return * 100)}% Return`,
-                url: window.location.href
-            };
+        function openShareModal() {
+            document.getElementById('shareModal').classList.add('visible');
+        }
 
-            if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    // User cancelled or error
-                    copyToClipboard(shareData.text);
-                }
-            } else {
-                copyToClipboard(shareData.text);
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('visible');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareModal();
             }
+        });
+
+        function getResultsSummary() {
+            const profileType = document.getElementById('profileType').textContent;
+            return {
+                stability: Math.round(scores.stability * 100),
+                liquidity: Math.round(scores.liquidity * 100),
+                return: Math.round(scores.return * 100),
+                profileType: profileType
+            };
+        }
+
+        function printResults() {
+            closeShareModal();
+            // Small delay to ensure modal is closed before print dialog
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        function shareViaEmail() {
+            const results = getResultsSummary();
+            const subject = encodeURIComponent('My TELOS Portfolio Assessment Results');
+            const body = encodeURIComponent(
+`I just completed my TELOS Portfolio Purpose assessment!
+
+My Profile: ${results.profileType}
+
+Score Breakdown:
+• Stability: ${results.stability}%
+• Liquidity: ${results.liquidity}%
+• Return: ${results.return}%
+
+To discuss these results with a professional advisor, visit:
+https://www.triviumam.com
+
+Trivium Asset Management Partners`);
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+            closeShareModal();
+        }
+
+        function shareViaSMS() {
+            const results = getResultsSummary();
+            const message = encodeURIComponent(
+`TELOS Portfolio Results: ${results.profileType}\n\nStability: ${results.stability}% | Liquidity: ${results.liquidity}% | Return: ${results.return}%\n\nDiscuss with an advisor: www.triviumam.com`);
+            
+            // SMS URI scheme works on mobile devices
+            window.location.href = `sms:?body=${message}`;
+            closeShareModal();
         }
 
         function copyToClipboard(text) {
