@@ -149,6 +149,7 @@ npm run test:all    # All tests
 - Raw scores: 5-25 per section (sum of 5 questions, 1-5 scale)
 - Normalization: `score / totalAllScores` gives barycentric coordinates
 - Triangle positioning: weighted sum of vertex coordinates
+- **Score Amplification (1.8x)**: Deviations from center (0.333) are amplified for more dramatic visualization
 
 ### Asset Allocation
 - Banking: (Stability + Liquidity) / 2
@@ -160,6 +161,27 @@ npm run test:all    # All tests
 - `localStorage` for persistence during session
 - Reset on page load to prevent prefilled answers
 - Answers keyed as `q1` through `q15`
+
+---
+
+## Session Updates
+
+### Update: February 26, 2026 (Session 2)
+
+#### Task 9: Score Amplification Enhancement ✅
+- Added `amplifyScores()` function with 1.8x spread factor
+- Amplifies deviation from center (0.333) for more dramatic point movement
+- Keeps original scores for percentage display (accuracy preserved)
+- Uses amplified scores only for triangle visualization
+- Added embedded test for amplification function
+- Updated resize handler to use amplified scores
+
+**Technical Details:**
+```javascript
+// Amplify deviations from center
+let sNew = center + (s - center) * spreadFactor;
+// Clamp to [0.05, 0.95] and re-normalize
+```
 
 ---
 

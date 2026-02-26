@@ -1591,6 +1591,30 @@
             return scores;
         }
 
+        // Amplify scores for more dramatic triangle visualization
+        // Spread factor of 1.8 makes moderate differences visually meaningful
+        function amplifyScores(s, l, r, spreadFactor = 1.8) {
+            const center = 1/3;
+            
+            // Amplify deviations from center
+            let sNew = center + (s - center) * spreadFactor;
+            let lNew = center + (l - center) * spreadFactor;
+            let rNew = center + (r - center) * spreadFactor;
+            
+            // Clamp to valid range [0.05, 0.95] to stay within triangle
+            sNew = Math.max(0.05, Math.min(0.95, sNew));
+            lNew = Math.max(0.05, Math.min(0.95, lNew));
+            rNew = Math.max(0.05, Math.min(0.95, rNew));
+            
+            // Re-normalize to sum to 1
+            const total = sNew + lNew + rNew;
+            return {
+                stability: sNew / total,
+                liquidity: lNew / total,
+                return: rNew / total
+            };
+        }
+
         // ============================================
         // RESULTS
         // ============================================
@@ -1611,8 +1635,9 @@
             // Calculate asset allocation
             updateAssetAllocation();
 
-            // Draw triangle
-            setTimeout(() => drawPortfolioTriangle(scores), 100);
+            // Draw triangle with amplified scores for more dramatic visualization
+            const amplifiedScores = amplifyScores(scores.stability, scores.liquidity, scores.return);
+            setTimeout(() => drawPortfolioTriangle(amplifiedScores), 100);
         }
 
         function updateProfileInterpretation() {
@@ -1979,6 +2004,19 @@
             if (Math.abs(s + l + r - 1) > 0.001) throw new Error('Coordinates must sum to 1');
         });
 
+        test('Amplification: Increases spread from center', () => {
+            // Test that amplification moves scores away from center
+            const result = amplifyScores(0.4, 0.33, 0.27);
+            
+            // Stability should be amplified further from 0.33
+            if (result.stability <= 0.4) throw new Error('Stability should be amplified above 0.4');
+            // Return should be pushed further below 0.33
+            if (result.return >= 0.27) throw new Error('Return should be reduced below 0.27');
+            // Sum should still equal 1
+            const sum = result.stability + result.liquidity + result.return;
+            if (Math.abs(sum - 1) > 0.001) throw new Error('Amplified scores must sum to 1');
+        });
+
         test('Asset allocation: Sums to 100%', () => {
             const tempAnswers = { ...answers };
             answers = {};
@@ -2022,7 +2060,8 @@
         // Handle canvas resize
         window.addEventListener('resize', () => {
             if (currentSection === 4) {
-                drawPortfolioTriangle(scores);
+                const amplifiedScores = amplifyScores(scores.stability, scores.liquidity, scores.return);
+                drawPortfolioTriangle(amplifiedScores);
             }
         });
     </script>
